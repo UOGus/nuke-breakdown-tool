@@ -67,7 +67,23 @@ class BreakdownPanel(nukescripts.PythonPanel):
     def connectPasses(self):
         passListWidget = self.passList.getObject()
         passes = [passListWidget.list.item(x).text() for x in range(passListWidget.list.count())]
-        print(passes)
+        
+        pass_count = 0
+        last_clip = None
+
+        for i in range(len(passes) - 1):
+            start_frame = self.frame.value() + (21 * pass_count)
+            end_frame = start_frame + 20
+
+            if last_clip:
+                new_clip = createTransition(passes[i], passes[i+1], (start_frame, end_frame))
+                new_clip.setInput(1, last_clip)
+                last_clip = new_clip
+            else:
+                last_clip = createTransition(passes[i], passes[i+1], (start_frame, end_frame))
+
+            pass_count += 1
+           
 
     def knobChanged(self, knob):
         #cases for the knobChanged callback
