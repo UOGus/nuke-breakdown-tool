@@ -35,6 +35,7 @@ class PassList(QWidget):
                 self.list.addItem(QListWidgetItem(name))
         
     def makeUI(self):
+        #required for pyside widgets
         return self
 
     def removePass(self):
@@ -66,8 +67,6 @@ class BreakdownPanel(nukescripts.PythonPanel):
         
         self.addKnob(self.renderButton)
         self.addKnob(self.passList)
-        
-     
 
     def knobChanged(self, knob):
         #cases for the knobChanged callback
@@ -121,7 +120,12 @@ def createTransition(fromPass, toPass, range):
     appendClip['lastFrame'].setValue(range[1])
 
     #connecteding nodes
-
+    merge.setInput(0, text)
+    merge.setInput(1, b)
+    rect.setInput(0, merge)
+    rect.setInput(1, a)
+    frameRange.setInput(0, rect)
+    appendClip.setInput(0, frameRange)
     print('success')
 
 def addPanel():
