@@ -1,6 +1,6 @@
 import nuke
 import nukescripts
-from PySide2.QtWidgets import QWidget, QListWidget, QListWidgetItem, QVBoxLayout, QPushButton
+from PySide6.QtWidgets import QWidget, QListWidget, QListWidgetItem, QVBoxLayout, QPushButton, QAbstractItemView
 
 class PassList(QWidget):
     def __init__(self):
@@ -10,7 +10,7 @@ class PassList(QWidget):
         
         #init widgets
         self.list = QListWidget()
-        self.list.setDragDropMode(self.list.InternalMove)
+        self.list.setDragDropMode(QAbstractItemView.InternalMove)
 
         self.addButton = QPushButton('add selected nodes')
         self.removeButton = QPushButton('remove selected pass')
@@ -51,14 +51,14 @@ class BreakdownPanel(nukescripts.PythonPanel):
         nukescripts.PythonPanel.__init__(self, 'breakdown')
 
         #knobs
-        self.renderPath = nuke.File_Knob('render_path', 'file')
+        #self.renderPath = nuke.File_Knob('render_path', 'file')
         self.frame = nuke.Int_Knob('frame', 'start frame')
         
         self.passList = nuke.PyCustom_Knob('pass_list', 'pass order', 'PassList()')
         self.renderButton = nuke.PyScript_Knob("render_button", "render")
         
         #adding knobs to panel
-        self.addKnob(self.renderPath)
+        #self.addKnob(self.renderPath)
         self.addKnob(self.frame)
         
         self.addKnob(self.renderButton)
