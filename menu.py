@@ -3,9 +3,9 @@ This file registers the custom node with Nuke, which
 lets us use the node in the application
 '''
 import nuke
-import breakdown
+from breakdown import addPanel
 
-
-nodemenu = nuke.menu('Nodes')
+paneMenu = nuke.menu('Pane')
+paneMenu.addCommand('breakdown', addPanel)
 
 

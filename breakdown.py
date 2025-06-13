@@ -156,6 +156,3 @@ def createTransition(fromPass, toPass, range):
 def addPanel():
     p = BreakdownPanel()
     return p.addToPane()
-
-paneMenu = nuke.menu('Pane')
-paneMenu.addCommand('breakdown', addPanel)
